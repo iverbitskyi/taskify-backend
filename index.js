@@ -25,9 +25,7 @@ import { register, login, getMe } from "./controllers/UserController.js";
 // ------- DB CONNECT ------------------------------------------------------
 mongoose.set("strictQuery", false);
 mongoose
-	.connect(
-		"mongodb+srv://admin:pQ9wXrlPCK7Bk9SD@cluster0.4kchp7s.mongodb.net/blog?retryWrites=true&w=majority"
-	)
+	.connect(process.env.MONGODB_URL)
 	.then(() => console.log("DB ok"))
 	.catch((err) => console.log("DB error", err));
 
@@ -92,7 +90,7 @@ app.patch(
 );
 
 // -------- SERVER CONNECT -----------------------------------------------
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
 	if (err) {
 		return console.log(err);
 	}
